@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Macarrão no Pote Lucrativo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --laranja: #f95d1a;
+  --laranja2: #ee492f;
+  --amarelo: #ffbf29;
+  --verde: #2a9e52;
+  --escuro: #281c15;
+  --muted: #756157;
+  --bege: #fcfbf7;
+  --borda: #e8e0d9;
+  --card: #ffffff;
+  --bg: #f5ede4;
+  --grad: linear-gradient(135deg,#f95d1a,#ee492f);
+  --grad-warm: linear-gradient(135deg,#ffbf29,#f95d1a);
+  --shadow: 0 4px 18px rgba(40,28,21,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--escuro);font-size:15px;line-height:1.7;min-height:100vh}
+
+/* HERO */
+.hero{background:var(--grad);padding:26px 20px 22px;text-align:center}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);border-radius:50px;color:#fff;font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 16px;margin-bottom:12px}
+.hero h1{font-family:'Poppins',sans-serif;font-size:clamp(20px,5vw,32px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:6px}
+.hero h1 span{color:var(--amarelo)}
+.hero p{color:rgba(255,255,255,.85);font-size:13.5px;max-width:460px;margin:0 auto}
+.hero-stats{display:flex;justify-content:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.hs{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 16px;text-align:center}
+.hs .n{font-family:'Poppins',sans-serif;font-size:20px;font-weight:900;color:var(--amarelo);display:block}
+.hs .l{font-size:11px;color:rgba(255,255,255,.8)}
+
+/* TABS */
+.nav{background:#fff;border-bottom:2px solid var(--borda);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(40,28,21,.08)}
+.nav-inner{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:960px;margin:0 auto}
+.nav-inner::-webkit-scrollbar{display:none}
+.nt{flex-shrink:0;padding:13px 16px;font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;display:flex;align-items:center;gap:5px}
+.nt:hover{color:var(--laranja);background:#fff8f2}
+.nt.active{color:var(--laranja);border-bottom-color:var(--laranja);background:#fff8f2}
+
+/* CONTENT */
+.tc{display:none;max-width:960px;margin:0 auto;padding:24px 16px 70px}
+.tc.active{display:block}
+
+/* TIPOGRAFIA */
+.badge{display:inline-block;background:var(--grad);color:#fff;font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:4px 14px;border-radius:50px;margin-bottom:10px}
+h2.st{font-family:'Poppins',sans-serif;font-size:clamp(19px,4vw,26px);font-weight:900;color:var(--escuro);margin-bottom:6px;line-height:1.2}
+h2.st span{color:var(--laranja)}
+p.ss{color:var(--muted);font-size:14px;margin-bottom:22px;max-width:560px}
+
+/* CARDS */
+.card{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:18px 20px;margin-bottom:13px;box-shadow:var(--shadow)}
+.card h3{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.destaque{background:linear-gradient(135deg,#fff8f0,#fff3e6);border-left:4px solid var(--laranja);border-radius:0 12px 12px 0;padding:13px 17px;margin:14px 0;font-size:14px}
+.destaque strong{color:var(--laranja)}
+.dica{background:#f0faf4;border-left:4px solid var(--verde);border-radius:0 12px 12px 0;padding:13px 17px;margin:14px 0;font-size:14px}
+.dica strong{color:var(--verde)}
+.aviso{background:#fff8e1;border-left:4px solid var(--amarelo);border-radius:0 12px 12px 0;padding:13px 17px;margin:14px 0;font-size:14px}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:14px 0}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:14px 0}
+@media(max-width:580px){.g2,.g3{grid-template-columns:1fr}}
+
+/* STEPS */
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f0ebe3;font-size:14px;align-items:flex-start}
+.steps li:last-child{border-bottom:none}
+.sn{flex-shrink:0;width:26px;height:26px;background:var(--grad);color:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+/* LISTA CHECK */
+.lc{list-style:none;margin:12px 0}
+.lc li{padding:7px 0 7px 28px;position:relative;border-bottom:1px solid #f0ebe3;font-size:14px}
+.lc li:last-child{border-bottom:none}
+.lc li::before{content:"✓";position:absolute;left:0;top:7px;color:var(--verde);font-weight:700;font-size:15px}
+
+/* TABELA */
+.tb{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+.tb th{background:var(--escuro);color:var(--amarelo);padding:10px 13px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.tb th:first-child{border-radius:10px 0 0 0}
+.tb th:last-child{border-radius:0 10px 0 0}
+.tb td{padding:9px 13px;border-bottom:1px solid var(--borda);vertical-align:top}
+.tb tr:nth-child(even) td{background:#fdf9f5}
+.tb tr:last-child td{border-bottom:none}
+
+/* RECEITAS GRID */
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:20px}
+.rc{background:#fff;border:1.5px solid var(--borda);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:all .2s}
+.rc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(249,93,26,.15);border-color:var(--laranja)}
+.rc-top{padding:16px 16px 10px}
+.rc-emoji{font-size:34px;margin-bottom:8px;display:block}
+.rc h3{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--escuro);margin-bottom:3px}
+.rc .rs{font-size:12px;color:var(--muted)}
+.rc-tags{display:flex;gap:5px;flex-wrap:wrap;padding:0 16px 12px}
+.tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.tv{background:#e8f5ed;color:#1a7a3d}
+.tl{background:#fff0e6;color:#c44a0e}
+.ta{background:#e8f0ff;color:#1a4db8}
+.tp{background:#f0e8ff;color:#6b21a8}
+.rc-bot{border-top:1px solid var(--borda);padding:9px 16px;display:flex;justify-content:space-between;align-items:center;background:#fdf9f5}
+.rc-bot .rp{font-family:'Poppins',sans-serif;font-weight:800;color:var(--laranja);font-size:14px}
+.rc-bot .rt{font-size:12px;color:var(--muted)}
+
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(40,28,21,.6);z-index:200;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px}
+.mo.open{display:flex}
+.md{background:#fff;border-radius:18px;max-width:620px;width:100%;margin:auto;overflow:hidden;animation:mi .22s ease}
+@keyframes mi{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.md-top{padding:24px 24px 16px;position:relative}
+.mc{position:absolute;top:14px;right:14px;background:var(--borda);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.mc:hover{background:#ddd5cc}
+.md-emoji{font-size:44px;margin-bottom:8px;display:block}
+.md h2{font-family:'Poppins',sans-serif;font-size:20px;font-weight:900;color:var(--escuro);margin-bottom:5px}
+.md-meta{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+.md-body{padding:0 24px 24px}
+.ms{margin-bottom:20px}
+.ms h4{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--laranja);text-transform:uppercase;letter-spacing:.06em;margin-bottom:9px;padding-bottom:5px;border-bottom:1.5px solid var(--borda)}
+.il{list-style:none}
+.il li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0ebe3;font-size:13.5px}
+.il li:last-child{border-bottom:none}
+.il .q{font-weight:600;color:var(--laranja)}
+.pl{list-style:none}
+.pl li{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid #f0ebe3;font-size:13.5px;align-items:flex-start}
+.pl li:last-child{border-bottom:none}
+.pn{flex-shrink:0;width:24px;height:24px;background:var(--grad);color:#fff;font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cb{background:linear-gradient(135deg,#fff8f0,#fff3e6);border:1.5px solid var(--laranja);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;text-align:center}
+.cv{font-family:'Poppins',sans-serif;font-size:18px;font-weight:900;color:var(--laranja);display:block}
+.cl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+
+/* CALCULADORA */
+.ci{width:100%;border:1.5px solid var(--borda);border-radius:10px;padding:10px 13px;font-family:'Inter',sans-serif;font-size:14px;color:var(--escuro);background:#fdf9f5;transition:border-color .2s;margin-bottom:13px}
+.ci:focus{outline:none;border-color:var(--laranja);background:#fff}
+.cl2{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:block}
+.cr2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.cr2{grid-template-columns:1fr}}
+.rb{background:var(--grad);border-radius:14px;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;margin-top:18px}
+.ri{text-align:center}
+.rv{font-family:'Poppins',sans-serif;font-size:26px;font-weight:900;color:#fff;display:block}
+.rl{font-size:10px;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.05em}
+.slider{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:var(--borda);outline:none}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--grad);cursor:pointer;box-shadow:0 2px 8px rgba(238,73,47,.35)}
+.slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--grad);cursor:pointer;border:none}
+.mo2{background:#fff;border:1.5px solid var(--borda);border-radius:12px;padding:16px;margin-top:13px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:11px}
+.mi2{text-align:center}
+.mv2{font-family:'Poppins',sans-serif;font-size:20px;font-weight:900;color:var(--laranja);display:block}
+.ml2{font-size:12px;color:var(--muted)}
+
+/* VENDER */
+.ac{background:#fff;border:1.5px solid var(--borda);border-radius:14px;overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow)}
+.ah{display:flex;align-items:center;gap:12px;padding:15px 18px;cursor:pointer;user-select:none}
+.ai{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ai.g{background:#e8f5ed}
+.ai.b{background:#e8f0ff}
+.ai.r{background:#ffe8f0}
+.ai.y{background:#fff8e1}
+.ah h3{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;flex:1}
+.achv{color:var(--muted);font-size:18px;transition:transform .2s;margin-left:auto}
+.ab{display:none;padding:0 18px 16px;border-top:1px solid var(--borda)}
+.ab.open{display:block;padding-top:14px}
+.msg{background:#f0f9f0;border:1.5px solid #c3e6c3;border-radius:11px;padding:13px 15px;font-size:13.5px;line-height:1.7;white-space:pre-line;margin:10px 0;position:relative;cursor:pointer}
+.msg:hover{background:#e4f4e4}
+.cpb{position:absolute;top:8px;right:8px;background:var(--verde);color:#fff;border:none;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer}
+.cpb:hover{background:#228a46}
+.cpb.ok{background:#1a6b35}
+
+/* UTENSILIOS */
+.ut-card{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:16px 18px;margin-bottom:11px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start}
+.ut-icon{font-size:28px;flex-shrink:0;line-height:1}
+.ut-card h4{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.ut-card p{font-size:13px;color:var(--muted);margin:0}
+.ut-card .ut-tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;margin-top:5px;display:inline-block}
+.ut-obt{background:#e8f5ed;color:#1a7a3d}
+.ut-comp{background:#fff0e6;color:#c44a0e}
+
+/* BONUS */
+.bh{background:var(--grad-warm);border-radius:14px;padding:22px;text-align:center;margin-bottom:20px;color:#fff}
+.bh h2{font-family:'Poppins',sans-serif;font-size:21px;font-weight:900;color:#fff;margin-bottom:5px}
+.bh p{font-size:13.5px;color:rgba(255,255,255,.9)}
+.bc{background:#fff;border:2px solid var(--borda);border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.bch{display:flex;align-items:center;gap:13px;padding:16px 18px;cursor:pointer}
+.bci{width:48px;height:48px;background:var(--grad-warm);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.bch h3{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;margin-bottom:2px;flex:1}
+.bt{font-size:11px;font-weight:600;color:var(--verde);background:#e8f5ed;padding:2px 9px;border-radius:20px;display:inline-block}
+.bb{display:none;border-top:1.5px solid var(--borda);padding:18px}
+.bb.open{display:block}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--escuro);color:#fff;padding:9px 20px;border-radius:50px;font-size:13.5px;font-weight:600;z-index:999;transition:transform .25s ease;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* WELCOME */
+.wg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:13px;margin:18px 0}
+.wc{background:#fff;border:1.5px solid var(--borda);border-radius:13px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
+.wc:hover{border-color:var(--laranja);transform:translateY(-2px);box-shadow:0 8px 22px rgba(249,93,26,.15)}
+.wc .wi{width:46px;height:46px;background:var(--grad-warm);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;margin:0 auto 10px}
+.wc h3{font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;margin-bottom:3px}
+.wc p{font-size:12px;color:var(--muted);margin:0}
+
+/* FASE */
+.fase{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.fase::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}
+.fase .fn{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;color:var(--laranja);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.fase h3{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px}
+.fase ul{list-style:none}
+.fase ul li{padding:4px 0 4px 18px;position:relative;font-size:14px}
+.fase ul li::before{content:'→';position:absolute;left:0;color:var(--laranja);font-weight:700}
+
+@media(max-width:460px){.cb{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">🍝 Método Completo — Seu Acesso</div>
+  <h1>Macarrão no Pote <span>Lucrativo</span></h1>
+  <p>Tudo que você precisa para começar do zero e vender ainda esta semana.</p>
+  <div class="hero-stats">
+    <div class="hs"><span class="n">15</span><span class="l">Receitas</span></div>
+    <div class="hs"><span class="n">R$300</span><span class="l">Pot./semana</span></div>
+    <div class="hs"><span class="n">3</span><span class="l">Bônus</span></div>
+    <div class="hs"><span class="n">0</span><span class="l">Experiência necessária</span></div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-inner" role="tablist">
+    <button class="nt active" onclick="go('inicio')">🏠 Início</button>
+    <button class="nt" onclick="go('utensilios')">🍳 Utensílios</button>
+    <button class="nt" onclick="go('receitas')">🍝 Receitas</button>
+    <button class="nt" onclick="go('montar')">📦 Montar e Embalar</button>
+    <button class="nt" onclick="go('vender')">📱 Como Vender</button>
+    <button class="nt" onclick="go('calculadora')">💰 Calculadora</button>
+    <button class="nt" onclick="go('escalar')">📈 Crescer</button>
+    <button class="nt" onclick="go('bonus')">🎁 Bônus</button>
+  </div>
+</div>
+
+<!-- ======= INÍCIO ======= -->
+<div id="t-inicio" class="tc active">
+  <div class="badge">Bem-vindo ao método</div>
+  <h2 class="st">Por onde <span>começar?</span></h2>
+  <p class="ss">Siga a ordem abaixo e você vai do zero à primeira venda em até 7 dias. Não pule etapas.</p>
+
+  <div class="wg">
+    <div class="wc" onclick="go('utensilios')"><div class="wi">🍳</div><h3>1. Utensílios</h3><p>O que você vai precisar antes de cozinhar</p></div>
+    <div class="wc" onclick="go('receitas')"><div class="wi">🍝</div><h3>2. Receitas</h3><p>15 receitas com ingredientes básicos</p></div>
+    <div class="wc" onclick="go('montar')"><div class="wi">📦</div><h3>3. Montar e Embalar</h3><p>Como montar o pote que vende sozinho</p></div>
+    <div class="wc" onclick="go('vender')"><div class="wi">📱</div><h3>4. Vender</h3><p>Onde vender e o que falar para o cliente</p></div>
+    <div class="wc" onclick="go('calculadora')"><div class="wi">💰</div><h3>5. Calculadora</h3><p>Quanto cobrar e quanto vai sobrar</p></div>
+    <div class="wc" onclick="go('escalar')"><div class="wi">📈</div><h3>6. Crescer</h3><p>De 10 para 50 potes por semana</p></div>
+  </div>
+
+  <div class="card" style="border-color:var(--laranja);background:linear-gradient(135deg,#fff8f0,#fff3e6)">
+    <h3>🔥 Por que o Macarrão no Pote funciona?</h3>
+    <ul class="lc" style="margin-top:8px">
+      <li>Custo de R$3 a R$6 por pote — vende entre R$15 e R$25</li>
+      <li>30 minutos de preparo = 10 potes prontos para vender</li>
+      <li>Não precisa de restaurante, funcionário nem equipamento caro</li>
+      <li>Produto de recompra: quem compra uma vez vira cliente fixo</li>
+      <li>Vende pelo celular, no bairro, no trabalho, na escola — em qualquer lugar</li>
+    </ul>
+  </div>
+
+  <div class="destaque"><strong>⏱ Meta realista:</strong> Seguindo este método do início ao fim, a maioria das pessoas faz as primeiras vendas ainda na primeira semana. Você não precisa de nada pronto — só precisa começar.</div>
+</div>
+
+<!-- ======= UTENSÍLIOS ======= -->
+<div id="t-utensilios" class="tc">
+  <div class="badge">Antes de cozinhar</div>
+  <h2 class="st">O que você vai <span>precisar</span></h2>
+  <p class="ss">A maioria já está na sua cozinha. Veja o que falta comprar — tudo barato e fácil de achar.</p>
+
+  <div class="badge" style="background:var(--escuro);margin-bottom:12px">🥄 Utensílios de cozinha</div>
+
+  <div class="ut-card"><div class="ut-icon">🍲</div><div><h4>Panela grande (5 litros ou mais)</h4><p>Para cozinhar 1kg de macarrão de uma vez. Panelas menores obrigam a fazer em partes — perda de tempo.</p><span class="ut-tag ut-obt">Provavelmente já tem</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🍳</div><div><h4>Frigideira grande antiaderente</h4><p>Para refogar o molho e misturar com o macarrão. Tamanho mínimo: 28cm. Antiaderente facilita a limpeza e evita que grude.</p><span class="ut-tag ut-obt">Provavelmente já tem</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🫙</div><div><h4>Escorredor de macarrão</h4><p>Indispensável para escorrer sem perder macarrão. Se não tiver, pode usar uma tampa com folga — mas o escorredor é mais prático.</p><span class="ut-tag ut-comp">Comprar se não tiver — R$8 a R$15</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🥄</div><div><h4>Colher de pau ou espátula de silicone</h4><p>Para mexer o molho sem arranhar a frigideira antiaderente. Silicone é melhor que metal na frigideira.</p><span class="ut-tag ut-obt">Provavelmente já tem</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🥢</div><div><h4>Concha ou pegador de macarrão</h4><p>Para colocar o macarrão nos potes sem fazer bagunça. O pegador de macarrão (aquele com dentes) organiza melhor no pote.</p><span class="ut-tag ut-comp">Comprar — R$5 a R$12</span></div></div>
+  <div class="ut-card"><div class="ut-icon">⚖️</div><div><h4>Balança de cozinha</h4><p>Para pesar os ingredientes e manter as porções sempre iguais. Padronizar é o segredo para o cliente receber o mesmo produto toda semana.</p><span class="ut-tag ut-comp">Comprar — R$15 a R$30</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🔪</div><div><h4>Faca e tábua de corte</h4><p>Para picar cebola, alho, salsinha, carnes. Use tábuas diferentes para carne crua e legumes para evitar contaminação cruzada.</p><span class="ut-tag ut-obt">Provavelmente já tem</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🥣</div><div><h4>Tigela grande (bowl)</h4><p>Para misturar o macarrão com o molho antes de montar os potes. Facilita muito na hora de distribuir uniformemente.</p><span class="ut-tag ut-obt">Provavelmente já tem</span></div></div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">📦 Embalagens e apresentação</div>
+
+  <div class="ut-card"><div class="ut-icon">🫙</div><div><h4>Potes plásticos com tampa — 500ml</h4><p>O tamanho padrão para uma porção adulta. Use sempre potes com símbolo de "apto para alimentos" (copo e garfo na base). Transparente é melhor — o cliente vê o produto.</p><span class="ut-tag ut-comp">Atacadão / Mercado Livre — R$0,60 a R$1,20/un</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🫙</div><div><h4>Potes 700ml (versão premium)</h4><p>Para receitas fitness ou versão maior. Justifica cobrar R$3 a R$5 a mais. O custo extra de ingrediente é mínimo.</p><span class="ut-tag ut-comp">Atacadão / Shopee — R$0,90 a R$1,50/un</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🏷️</div><div><h4>Etiquetas adesivas</h4><p>Tamanho sugerido: 5×8cm. Imprima em casa ou peça numa gráfica online. A etiqueta passa profissionalismo e protege você legalmente (nome, validade, ingredientes).</p><span class="ut-tag ut-comp">Gráfica / Shopee — R$0,10 a R$0,20/un</span></div></div>
+  <div class="ut-card"><div class="ut-icon">🥄</div><div><h4>Garfos descartáveis</h4><p>Entregue um garfo junto com cada pote. Esse detalhe simples impressiona o cliente e diferencia você de quem não pensa nesses detalhes.</p><span class="ut-tag ut-comp">Atacado — R$0,05 a R$0,10/un</span></div></div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">🧼 Higiene — obrigatório</div>
+
+  <div class="dica"><strong>💡 Regras básicas de higiene:</strong><br>
+  • Lave as mãos com sabão por 20 segundos antes de começar<br>
+  • Use avental e cabelo preso (ou touca)<br>
+  • Use tábuas separadas para carne crua e legumes<br>
+  • Não produza com sintomas de gripe ou ferida nas mãos<br>
+  • Lave todos os utensílios com água quente antes de usar</div>
+
+  <div class="aviso"><strong>⚠️ Validade dos potes:</strong> Refrigerado (abaixo de 5°C): até 3 dias. Freezer: até 30 dias. Temperatura ambiente: não deixe mais de 2 horas fora da geladeira.</div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">🛒 Onde comprar os ingredientes mais barato</div>
+  <table class="tb">
+    <thead><tr><th>O que comprar</th><th>Onde comprar</th><th>Dica</th></tr></thead>
+    <tbody>
+      <tr><td>Macarrão, óleo, molho de tomate</td><td>Atacadão, Assaí, Makro</td><td>Compre em grande quantidade — mais barato por kg</td></tr>
+      <tr><td>Carne moída, frango, calabresa</td><td>Açougue local ou supermercado</td><td>Compare preço por kg — o açougue quase sempre é mais barato</td></tr>
+      <tr><td>Cebola, alho, salsinha, legumes</td><td>Sacolão ou feira livre</td><td>Compre toda semana, já que murcha rápido</td></tr>
+      <tr><td>Queijo, cream cheese, requeijão</td><td>Supermercado</td><td>Marca própria tem qualidade equivalente à marca famosa</td></tr>
+      <tr><td>Embalagens e etiquetas</td><td>Shopee, Mercado Livre, atacado</td><td>Compre 100 unidades — o unitário cai muito</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======= RECEITAS ======= -->
+<div id="t-receitas" class="tc">
+  <div class="badge">15 receitas com ingredientes básicos</div>
+  <h2 class="st">Escolha sua receita e <span>comece hoje</span></h2>
+  <p class="ss">Todas feitas com ingredientes que você encontra em qualquer mercado. Clique para ver o passo a passo completo.</p>
+  <div class="rg" id="rg"></div>
+</div>
+
+<!-- MODAL -->
+<div class="mo" id="modal" onclick="fModal(event)">
+  <div class="md" id="md">
+    <div class="md-top">
+      <button class="mc" onclick="fModalBtn()">✕</button>
+      <span class="md-emoji" id="me"></span>
+      <h2 id="mh"></h2>
+      <div class="md-meta"><span>⏱ <span id="mte"></span></span><span>🍽 <span id="mre"></span></span><span>💰 <span id="mce"></span>/pote</span></div>
+      <div id="mta"></div>
+    </div>
+    <div class="md-body">
+      <div class="ms"><h4>Ingredientes</h4><ul class="il" id="mi"></ul></div>
+      <div class="ms"><h4>Modo de preparo — passo a passo</h4><ol class="pl" id="mp"></ol></div>
+      <div class="ms"><h4>Dica de venda</h4><div class="dica" id="md2" style="margin:0"></div></div>
+      <div class="cb">
+        <div><span class="cv" id="mcp"></span><span class="cl">Custo/pote</span></div>
+        <div><span class="cv" id="mpm"></span><span class="cl">Preço mín.</span></div>
+        <div><span class="cv" id="mpi"></span><span class="cl">Preço ideal</span></div>
+        <div><span class="cv" id="mlp"></span><span class="cl">Lucro/pote</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MONTAR E EMBALAR ======= -->
+<div id="t-montar" class="tc">
+  <div class="badge">Apresentação que vende sozinha</div>
+  <h2 class="st">Como montar o pote <span>perfeito</span></h2>
+  <p class="ss">A aparência é o que converte um "talvez" em "quero". Siga esses passos e seu pote vai parecer de restaurante.</p>
+
+  <div class="badge" style="background:var(--escuro);margin-bottom:12px">📦 Montagem do pote</div>
+  <ol class="steps">
+    <li><span class="sn">1</span><div><strong>Cozinhe o macarrão al dente</strong> — ele vai terminar de cozinhar com o calor do molho. Macarrão mole no pote = reclamação do cliente.</div></li>
+    <li><span class="sn">2</span><div><strong>Misture o molho ao macarrão</strong> na tigela grande. Não coloque macarrão seco no pote e jogue o molho por cima — fica desigual.</div></li>
+    <li><span class="sn">3</span><div><strong>Monte em camadas visíveis:</strong> coloque o macarrão primeiro, depois posicione a proteína (frango, carne) por cima, centralizada. O cliente vê a carne antes de abrir.</div></li>
+    <li><span class="sn">4</span><div><strong>Finalize com algo verde:</strong> cebolinha picada, salsinha ou manjericão por cima. Um toque de cor verde faz o pote parecer mais fresco e apetitoso.</div></li>
+    <li><span class="sn">5</span><div><strong>Se tiver queijo:</strong> polvilhe parmesão ou mussarela ralada por cima antes de tampar. Isso sela o pote visualmente e agrega valor percebido.</div></li>
+    <li><span class="sn">6</span><div><strong>Use pote transparente:</strong> o cliente precisa ver o produto. Pote opaco não vende — esconde o que você fez com cuidado.</div></li>
+    <li><span class="sn">7</span><div><strong>Tampe com firmeza</strong> e verifique se vedou bem. Um pote que vaza no bolso do cliente é garantia de não voltar a comprar.</div></li>
+    <li><span class="sn">8</span><div><strong>Cole a etiqueta centralizada</strong> na frente do pote. Uma etiqueta torta passa impressão de desleixo — leva 2 segundos a mais para alinhar.</div></li>
+    <li><span class="sn">9</span><div><strong>Refrigere imediatamente</strong> após montar. Nunca deixe o pote em temperatura ambiente por mais de 2 horas.</div></li>
+  </ol>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">🏷️ O que colocar na etiqueta</div>
+  <div class="card">
+    <h3>Etiqueta mínima que passa profissionalismo</h3>
+    <ul class="lc" style="margin-top:8px">
+      <li><strong>Nome do produto e sabor</strong> — ex: "Macarrão no Pote — Frango ao Molho"</li>
+      <li><strong>Data de produção</strong> — ex: "Produzido em 13/06"</li>
+      <li><strong>Validade</strong> — ex: "Consumir até 16/06 (3 dias)"</li>
+      <li><strong>Instrução</strong> — "Manter refrigerado"</li>
+      <li><strong>Seu contato</strong> — WhatsApp ou nome do negócio</li>
+      <li><strong>Ingredientes principais</strong> — importante para quem tem alergia</li>
+    </ul>
+  </div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">📸 A foto que vende</div>
+  <div class="card">
+    <h3>Como tirar foto boa sem equipamento</h3>
+    <ol class="steps" style="margin-top:8px">
+      <li><span class="sn">1</span><span>Coloque o pote perto de uma janela com luz natural — nunca use flash direto</span></li>
+      <li><span class="sn">2</span><span>Fundo branco (pano de prato) ou madeira — remove distração do fundo</span></li>
+      <li><span class="sn">3</span><span>Abra o pote para a foto — mostra o conteúdo e desperta apetite</span></li>
+      <li><span class="sn">4</span><span>Foto de cima (vista aérea) funciona melhor para potes</span></li>
+      <li><span class="sn">5</span><span>Sem filtro exagerado — foto natural converte mais do que editada</span></li>
+      <li><span class="sn">6</span><span>Tire antes de tampar — visual do pote aberto é muito mais apetitoso</span></li>
+    </ol>
+  </div>
+
+  <div class="dica"><strong>💡 Entrega profissional:</strong> Coloque o pote dentro de um saquinho plástico fechado com um nó (ou lacre) junto com um garfinho descartável. Esse detalhe custa R$0,10 e faz o cliente pensar que pagou mais caro do que pagou.</div>
+</div>
+
+<!-- ======= COMO VENDER ======= -->
+<div id="t-vender" class="tc">
+  <div class="badge">Suas primeiras vendas</div>
+  <h2 class="st">Como vender <span>já essa semana</span></h2>
+  <p class="ss">Você já tem clientes ao redor. Veja os canais, as mensagens prontas e a rotina semanal.</p>
+
+  <div id="ac"></div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:24px;margin-bottom:12px">🗓️ Rotina semanal de vendas</div>
+  <table class="tb">
+    <thead><tr><th>Dia</th><th>O que fazer</th><th>Tempo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Segunda</strong></td><td>Postar cardápio da semana no WhatsApp, grupos e Instagram</td><td>20 min</td></tr>
+      <tr><td><strong>Terça</strong></td><td>Receber pedidos e anotar em uma lista simples</td><td>10 min</td></tr>
+      <tr><td><strong>Quarta</strong></td><td>Confirmar pedidos e montar lista de compras</td><td>10 min</td></tr>
+      <tr><td><strong>Quinta</strong></td><td>Comprar ingredientes e produzir os potes</td><td>2–3h</td></tr>
+      <tr><td><strong>Sexta</strong></td><td>Entregar os potes e cobrar</td><td>1–2h</td></tr>
+      <tr><td><strong>Sábado</strong></td><td>Atender pedidos extras, postar foto do resultado</td><td>1h</td></tr>
+      <tr><td><strong>Domingo</strong></td><td>Contar o lucro, planejar o cardápio da próxima semana</td><td>15 min</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======= CALCULADORA ======= -->
+<div id="t-calculadora" class="tc">
+  <div class="badge">Calculadora de lucro</div>
+  <h2 class="st">Quanto você vai <span>ganhar?</span></h2>
+  <p class="ss">Preencha com seus custos reais. A calculadora mostra quanto cobrar e quanto vai sobrar por pote.</p>
+
+  <div class="card">
+    <h3 style="margin-bottom:16px">💰 Seus custos por pote</h3>
+    <div class="cr2">
+      <div><label class="cl2">Ingredientes (R$)</label><input type="number" class="ci" id="ci" value="3.50" step="0.10" oninput="calc()"></div>
+      <div><label class="cl2">Embalagem + etiqueta (R$)</label><input type="number" class="ci" id="ce" value="1.20" step="0.10" oninput="calc()"></div>
+      <div><label class="cl2">Gás + energia (R$)</label><input type="number" class="ci" id="cg" value="0.30" step="0.05" oninput="calc()"></div>
+      <div><label class="cl2">Frete / deslocamento (R$)</label><input type="number" class="ci" id="cf" value="0.50" step="0.10" oninput="calc()"></div>
+    </div>
+    <label class="cl2">Preço que você quer cobrar (R$)</label>
+    <input type="number" class="ci" id="cp" value="18.00" step="0.50" oninput="calc()">
+    <div class="rb">
+      <div class="ri"><span class="rv" id="rc">R$5,50</span><span class="rl">Custo real/pote</span></div>
+      <div class="ri"><span class="rv" id="rl">R$12,50</span><span class="rl">Lucro/pote</span></div>
+      <div class="ri"><span class="rv" id="rm">69%</span><span class="rl">Margem</span></div>
+      <div class="ri"><span class="rv" id="rmi">R$16,50</span><span class="rl">Preço mínimo</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3 style="margin-bottom:6px">📊 Sua meta de renda semanal</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Arraste para definir quantos potes por semana você quer vender.</p>
+    <label class="cl2">Potes por semana: <strong id="sv" style="color:var(--laranja)">20</strong></label>
+    <input type="range" class="slider" id="sl" min="5" max="100" value="20" oninput="calcMeta()">
+    <div class="mo2">
+      <div class="mi2"><span class="mv2" id="mr">R$360</span><span class="ml2">Receita bruta/semana</span></div>
+      <div class="mi2"><span class="mv2" id="mls">R$250</span><span class="ml2">Lucro líquido/semana</span></div>
+      <div class="mi2"><span class="mv2" id="mlm">R$1.000</span><span class="ml2">Lucro estimado/mês</span></div>
+      <div class="mi2"><span class="mv2" id="mtp">70 min</span><span class="ml2">Tempo de produção</span></div>
+    </div>
+  </div>
+
+  <div class="dica"><strong>💡 Regra de ouro:</strong> Nunca venda abaixo de 3× o custo real. Se o pote sai por R$5,00 de custo, o preço mínimo é R$15,00. Abaixo disso você está pagando para trabalhar.</div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">📊 Tabela de preços por sabor</div>
+  <table class="tb">
+    <thead><tr><th>Sabor</th><th>Custo/pote</th><th>Preço ideal</th><th>Lucro/pote</th></tr></thead>
+    <tbody>
+      <tr><td>🍅 Frango ao Molho</td><td>R$3,00</td><td>R$15–18</td><td style="color:var(--verde);font-weight:700">R$12–15</td></tr>
+      <tr><td>🥩 Carne Moída ao Molho</td><td>R$3,50</td><td>R$15–18</td><td style="color:var(--verde);font-weight:700">R$11–14</td></tr>
+      <tr><td>🌶️ Calabresa com Bacon</td><td>R$4,00</td><td>R$18–22</td><td style="color:var(--verde);font-weight:700">R$14–18</td></tr>
+      <tr><td>🧀 4 Queijos</td><td>R$4,50</td><td>R$20–24</td><td style="color:var(--verde);font-weight:700">R$15–19</td></tr>
+      <tr><td>🐟 Atum com Azeitona</td><td>R$3,50</td><td>R$17–21</td><td style="color:var(--verde);font-weight:700">R$13–17</td></tr>
+      <tr><td>💪 Fit com Frango Grelhado</td><td>R$5,00</td><td>R$22–27</td><td style="color:var(--verde);font-weight:700">R$17–22</td></tr>
+      <tr><td>🥩 Carne Seca com Requeijão</td><td>R$6,00</td><td>R$24–30</td><td style="color:var(--verde);font-weight:700">R$18–24</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======= CRESCER ======= -->
+<div id="t-escalar" class="tc">
+  <div class="badge">Crescimento</div>
+  <h2 class="st">De 10 potes para <span>50 por semana</span></h2>
+  <p class="ss">Cada fase tem um objetivo diferente. Não tente pular etapas — cada uma prepara a próxima.</p>
+
+  <div class="fase"><div class="fn">Fase 1 — Semanas 1 a 4</div><h3>🌱 Validar: descobrir o que vende</h3><p style="font-size:14px;color:var(--muted);margin-bottom:10px">Foco: testar, aprender, errar barato.</p><ul><li>Faça 10 a 20 potes por semana apenas</li><li>Teste no máximo 3 sabores diferentes</li><li>Venda só para conhecidos no começo</li><li>Pergunte o que o cliente achou de cada sabor</li><li>Descubra quais 2 sabores mais vendem</li><li>Não gaste em nada novo antes dessa fase</li></ul></div>
+
+  <div class="fase"><div class="fn">Fase 2 — Meses 2 e 3</div><h3>📦 Padronizar: ganhar velocidade</h3><p style="font-size:14px;color:var(--muted);margin-bottom:10px">Foco: criar rotina eficiente e base de clientes fixos.</p><ul><li>Produza 25 a 40 potes por semana</li><li>Mantenha os 2 sabores campeões fixos + 1 rotativo</li><li>Crie grupo no WhatsApp com seus clientes fixos</li><li>Compre ingredientes em maior quantidade (mais barato por kg)</li><li>Invista em etiquetas impressas e embalagem melhor</li><li>Defina um dia e horário fixo de produção toda semana</li></ul></div>
+
+  <div class="fase"><div class="fn">Fase 3 — A partir do mês 4</div><h3>🚀 Ampliar: novos canais e mais renda</h3><p style="font-size:14px;color:var(--muted);margin-bottom:10px">Foco: crescer sem perder qualidade.</p><ul><li>Adicione sabores premium (carne seca, camarão)</li><li>Feche entrega semanal fixa com empresa, salão ou escola</li><li>Treine alguém da família para ajudar na produção</li><li>Crie assinatura semanal com desconto fixo para cliente fiel</li><li>Considere venda em feiras livres e mercados do bairro</li></ul></div>
+
+  <div class="badge" style="background:var(--escuro);margin-top:22px;margin-bottom:12px">⚡ Como produzir mais sem cansar</div>
+  <div class="g2">
+    <div class="card"><h3>🍲 Cozinhe em lote</h3><p style="font-size:13.5px;margin:0">2kg de macarrão de uma vez ocupa o mesmo tempo que 4× 500g. Dobra a produção sem dobrar o esforço.</p></div>
+    <div class="card"><h3>🧊 Congele os molhos</h3><p style="font-size:13.5px;margin:0">Faça o molho no dia anterior e congele em porções de 500ml. Na hora de montar é só esquentar.</p></div>
+    <div class="card"><h3>🍳 2 panelas ao mesmo tempo</h3><p style="font-size:13.5px;margin:0">Uma cozinhando a proteína, outra o macarrão. Corta o tempo de produção pela metade.</p></div>
+    <div class="card"><h3>📦 Linha de montagem</h3><p style="font-size:13.5px;margin:0">Monte todos os potes em sequência — coloca macarrão em todos, depois molho, depois proteína. Mais rápido e mais uniforme.</p></div>
+  </div>
+</div>
+
+<!-- ======= BÔNUS ======= -->
+<div id="t-bonus" class="tc">
+  <div class="bh"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.8;margin-bottom:6px">Materiais exclusivos</div><h2>Seus 3 bônus aqui dentro 🎁</h2><p>Cada bônus resolve um problema real de quem está começando.</p></div>
+
+  <div class="bc">
+    <div class="bch" onclick="tBonus('b1')"><div class="bci">💰</div><div style="flex:1"><h3>Tabela de Precificação Lucrativa</h3><span class="bt">✓ Bônus 1 — Valor R$27,00</span></div><span id="ch-b1" style="font-size:20px;color:var(--muted);transition:transform .2s">▾</span></div>
+    <div class="bb" id="bn-b1">
+      <p style="font-size:14px;margin-bottom:14px">Quanto cobrar por cada sabor — sem chute, sem perder dinheiro. Use a tabela abaixo como referência e ajuste para os preços da sua cidade.</p>
+      <table class="tb"><thead><tr><th>Sabor</th><th>Custo/pote</th><th>Preço mín.</th><th>Preço ideal</th><th>Lucro</th></tr></thead><tbody id="tb-prec"></tbody></table>
+      <div class="destaque" style="margin-top:14px"><strong>Fórmula:</strong> Preço de venda = Custo × 3 (no mínimo). Use a calculadora na aba ao lado para calcular com seus custos reais.</div>
+    </div>
+  </div>
+
+  <div class="bc">
+    <div class="bch" onclick="tBonus('b2')"><div class="bci">📱</div><div style="flex:1"><h3>Kit de Mensagens Prontas para Vender</h3><span class="bt">✓ Bônus 2 — Valor R$37,00</span></div><span id="ch-b2" style="font-size:20px;color:var(--muted);transition:transform .2s">▾</span></div>
+    <div class="bb" id="bn-b2">
+      <p style="font-size:14px;margin-bottom:14px">Copie, ajuste o sabor e o preço, e envie. Clique em qualquer mensagem para copiar com um toque.</p>
+      <div id="msgs"></div>
+    </div>
+  </div>
+
+  <div class="bc">
+    <div class="bch" onclick="tBonus('b3')"><div class="bci">🌟</div><div style="flex:1"><h3>Guia de Sabores Premium que Mais Vendem</h3><span class="bt">✓ Bônus 3 — Valor R$19,90</span></div><span id="ch-b3" style="font-size:20px;color:var(--muted);transition:transform .2s">▾</span></div>
+    <div class="bb" id="bn-b3">
+      <p style="font-size:14px;margin-bottom:14px">Quando você já tiver clientes fixos, esses sabores aumentam o ticket médio e a percepção de valor do seu negócio.</p>
+      <div id="prem"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✓ Copiado!</div>
+
+<script>
+// ============================================================
+// DADOS
+// ============================================================
+const receitas = [
+  {
+    id:1,e:'🍅',n:'Frango Desfiado ao Molho de Tomate',s:'A mais vendida — agrada todo mundo',
+    tags:[{t:'Clássica',c:'tv'},{t:'#1 em vendas',c:'tl'},{t:'Fácil',c:'ta'}],
+    tempo:'35 min',rende:'10 potes de 500ml',custo:'R$2,50–3,50',
+    cp:'R$3,00',pm:'R$12',pi:'R$15–18',lp:'R$12–15',
+    ing:[['Macarrão parafuso','1 kg'],['Coxa/sobrecoxa de frango','600 g'],['Molho de tomate (lata)','2 unid.'],['Cebola','2 médias'],['Alho','4 dentes'],['Azeite ou óleo','4 col. sopa'],['Sal, pimenta, orégano','a gosto'],['Queijo parmesão ralado','150 g (opcional)']],
+    passos:['Cozinhe o frango na panela de pressão com água e sal por 20 min. Escorra, desfie e tempere com alho amassado, sal e pimenta. Reserve.','Cozinhe o macarrão em água fervente com sal por 8 minutos (al dente — ainda firme). Escorra e reserve.','Em frigideira grande, aqueça o óleo e doure a cebola picada em fogo médio por 3 minutos.','Adicione o alho amassado e refogue por mais 1 minuto.','Adicione o molho de tomate, misture e deixe ferver por 5 minutos. Ajuste o sal e o orégano.','Junte o frango desfiado ao molho e misture. Deixe apurar por 3 minutos em fogo médio.','Em uma tigela grande, misture o macarrão escorrido ao molho com frango. Mexa bem para o molho envolver tudo.','Com a concha, distribua em potes transparentes. Coloque o frango visível no topo, finalize com queijo ralado e cebolinha picada.','Tampe, etiquete com nome + data + validade. Refrigere imediatamente.'],
+    dica:'<strong>💡 Como vender:</strong> Chame de "Frango caseiro desfiado no molho artesanal" — essa descrição aumenta a percepção de valor sem custar nada a mais. Foto do pote aberto com o frango visível converte muito.'
+  },
+  {
+    id:2,e:'🥩',n:'Carne Moída ao Molho de Tomate',s:'Econômica, saborosa e muito pedida',
+    tags:[{t:'Econômica',c:'tv'},{t:'Fácil',c:'ta'},{t:'Alta demanda',c:'tl'}],
+    tempo:'30 min',rende:'10 potes de 500ml',custo:'R$3,00–4,00',
+    cp:'R$3,50',pm:'R$13',pi:'R$16–19',lp:'R$12–15',
+    ing:[['Macarrão parafuso ou penne','1 kg'],['Carne moída (patinho ou acém)','500 g'],['Molho de tomate','2 latas'],['Cebola','1 grande'],['Alho','4 dentes'],['Extrato de tomate','1 col. sopa'],['Sal, pimenta, orégano, louro','a gosto'],['Óleo','2 col. sopa']],
+    passos:['Cozinhe o macarrão al dente. Escorra e reserve.','Em frigideira grande, aqueça o óleo e doure a cebola picada por 3 min.','Adicione o alho e refogue 1 min.','Acrescente a carne moída e mexa constantemente, quebrando os grumos, até dourar por completo (aprox. 7 min).','Adicione o extrato de tomate e misture por 1 minuto — aprofunda a cor e o sabor.','Despeje o molho de tomate, adicione as folhas de louro e misture. Cozinhe em fogo baixo por 10 minutos.','Tempere com sal, pimenta e orégano. Retire o louro.','Misture o macarrão ao molho em tigela grande. Distribua nos potes.','Finalize com salsinha picada e queijo ralado. Tampe e refrigere.'],
+    dica:'<strong>💡 Dica de custo:</strong> Compre carne moída em peça no açougue e peça para moer na hora — sai até 30% mais barato que a embalada no supermercado e a qualidade é muito melhor.'
+  },
+  {
+    id:3,e:'🌶️',n:'Calabresa com Bacon ao Molho',s:'Sabor defumado intenso — muito pedida',
+    tags:[{t:'Sabor forte',c:'tp'},{t:'Alta margem',c:'tl'},{t:'Fim de semana',c:'ta'}],
+    tempo:'35 min',rende:'10 potes de 500ml',custo:'R$3,80–5,00',
+    cp:'R$4,30',pm:'R$14',pi:'R$18–22',lp:'R$14–18',
+    ing:[['Macarrão penne ou rigatoni','1 kg'],['Linguiça calabresa fatiada','400 g'],['Bacon em cubinhos','200 g'],['Molho de tomate','2 latas'],['Cebola','1 grande'],['Alho','3 dentes'],['Páprica defumada','1 col. chá'],['Pimenta-do-reino','a gosto']],
+    passos:['Cozinhe o macarrão al dente. Escorra e reserve.','Coloque o bacon na frigideira fria, em fogo médio. Deixe dourar na própria gordura por 4 minutos — não precisa de óleo.','Com o bacon dourado, adicione a calabresa fatiada em rodelas e refogue por 3 minutos até dourar levemente.','Adicione a cebola em meias-luas e refogue por mais 2 minutos.','Adicione o alho picado e a páprica defumada. Mexa por 1 minuto.','Acrescente o molho de tomate. Misture bem e cozinhe em fogo médio por 8 minutos. O molho vai absorver o sabor defumado do bacon.','Tempere com sal e pimenta-do-reino. Ajuste a páprica se quiser mais sabor defumado.','Misture o macarrão ao molho em tigela grande. Distribua nos potes.','Finalize com páprica polvilhada por cima para visual. Tampe e refrigere.'],
+    dica:'<strong>💡 Estratégia de escassez:</strong> Ofereça esse sabor apenas às sextas e sábados. Disponível apenas no fim de semana cria antecipação e garante que os pedidos cheguem antes de você produzir.'
+  },
+  {
+    id:4,e:'🧀',n:'Macarrão 4 Queijos',s:'Cremoso — favorito das crianças e famílias',
+    tags:[{t:'Cremoso',c:'tp'},{t:'Sem carne',c:'tv'},{t:'Família',c:'ta'}],
+    tempo:'30 min',rende:'10 potes de 500ml',custo:'R$4,00–5,50',
+    cp:'R$4,70',pm:'R$15',pi:'R$20–24',lp:'R$15–19',
+    ing:[['Macarrão penne ou conchiglie','1 kg'],['Leite integral','500 ml'],['Manteiga','3 col. sopa'],['Farinha de trigo','2 col. sopa'],['Queijo prato ralado','100 g'],['Mussarela ralada','100 g'],['Parmesão ralado','50 g'],['Cream cheese','100 g'],['Noz-moscada, sal','a gosto']],
+    passos:['Cozinhe o macarrão al dente. Escorra e reserve.','Em panela média, derreta a manteiga em fogo médio.','Adicione a farinha e mexa sem parar com fouet ou espátula por 2 minutos — forma o roux que vai engrossar o molho.','Despeje o leite aos poucos (em 3 partes), mexendo constantemente para não empelotar.','Quando engrossar, reduza o fogo ao mínimo e adicione o queijo prato ralado. Mexa até derreter.','Adicione a mussarela, o parmesão e o cream cheese, um de cada vez, sempre mexendo.','Tempere com sal e uma pitada de noz-moscada. Molho deve ficar espesso mas fluido.','Misture o macarrão ao molho em tigela grande. Distribua nos potes.','Finalize com parmesão ralado por cima. Tampe e refrigere imediatamente.'],
+    dica:'<strong>💡 Ticket maior:</strong> Cobre R$4 a R$5 a mais que o frango ao molho. O molho branco passa percepção de "mais elaborado". Clientes aceitam R$22 a R$24 sem questionar.'
+  },
+  {
+    id:5,e:'🐟',n:'Atum com Azeitona e Molho de Tomate',s:'Rápido, sem carne, campeão em escritório',
+    tags:[{t:'Sem carne',c:'tv'},{t:'Rápido',c:'ta'},{t:'Escritório',c:'tl'}],
+    tempo:'20 min',rende:'10 potes de 500ml',custo:'R$3,00–4,00',
+    cp:'R$3,50',pm:'R$13',pi:'R$17–21',lp:'R$13–17',
+    ing:[['Macarrão fusilli ou parafuso','1 kg'],['Atum sólido em óleo','3 latas (270 g)'],['Azeitonas fatiadas','1 lata'],['Molho de tomate','2 latas'],['Alho','3 dentes'],['Azeite','3 col. sopa'],['Salsinha fresca','1 maço'],['Sal, pimenta','a gosto']],
+    passos:['Cozinhe o macarrão al dente. Escorra e reserve.','Em frigideira, aqueça o azeite e doure o alho fatiado em fogo médio-baixo por 2 minutos. Não deixe queimar.','Adicione o molho de tomate e deixe ferver por 4 minutos.','Escorra o atum das latas e acrescente ao molho. Misture delicadamente — não desfaça o atum em migalhas.','Adicione as azeitonas fatiadas e misture com cuidado.','Ajuste o sal e adicione pimenta-do-reino.','Acrescente a salsinha picada e mexa levemente.','Misture o macarrão ao molho em tigela grande. Distribua nos potes.','Finalize com um fio de azeite por cima e salsinha. Tampe e refrigere.'],
+    dica:'<strong>💡 Renomeie para vender mais:</strong> Chame de "Macarrão Mediterrâneo com Atum Sólido". O nome premium aumenta a percepção de valor e justifica cobrar R$2 a R$3 a mais do que "atum com molho".'
+  },
+  {
+    id:6,e:'🍗',n:'Frango ao Molho Branco (Bechamel)',s:'Cremoso e suave — gera recompra toda semana',
+    tags:[{t:'Cremoso',c:'tp'},{t:'Suave',c:'tv'},{t:'Recompra alta',c:'ta'}],
+    tempo:'35 min',rende:'10 potes de 500ml',custo:'R$3,80–5,00',
+    cp:'R$4,40',pm:'R$14',pi:'R$18–22',lp:'R$14–18',
+    ing:[['Macarrão penne ou talharim','1 kg'],['Peito de frango','500 g'],['Leite integral','500 ml'],['Creme de leite (caixinha)','1 unid.'],['Manteiga','3 col. sopa'],['Farinha de trigo','2 col. sopa'],['Alho','3 dentes'],['Sal, pimenta, noz-moscada','a gosto']],
+    passos:['Cozinhe o frango com água, sal e alho por 20 min na pressão. Desfie e reserve.','Cozinhe o macarrão al dente. Escorra e reserve.','Derreta a manteiga em panela, adicione a farinha e mexa 2 min (roux).','Acrescente o leite aos poucos, mexendo sempre, até engrossar.','Adicione o creme de leite e mexa bem. Tempere com sal, pimenta e noz-moscada.','Junte o frango desfiado ao molho e misture.','Misture o macarrão ao molho em tigela grande. Distribua nos potes.','Finalize com parmesão ralado e cebolinha. Tampe e refrigere.'],
+    dica:'<strong>💡 Por que gera recompra:</strong> Sabor cremoso e confortante cria hábito — clientes pedem toda semana. Ideal para quem quer construir uma base de clientes fiéis rapidamente.'
+  },
+  {
+    id:7,e:'💪',n:'Macarrão Integral Fit com Frango Grelhado',s:'Para academia, saúde e ticket alto',
+    tags:[{t:'Fitness',c:'tv'},{t:'Integral',c:'ta'},{t:'Ticket alto',c:'tl'}],
+    tempo:'40 min',rende:'10 potes de 500ml',custo:'R$4,50–6,00',
+    cp:'R$5,20',pm:'R$16',pi:'R$22–28',lp:'R$17–23',
+    ing:[['Macarrão integral parafuso','1 kg'],['Peito de frango','600 g'],['Abobrinha','2 unid.'],['Cenoura','2 unid.'],['Molho de tomate','2 latas'],['Azeite extra virgem','3 col. sopa'],['Limão','1 unid.'],['Ervas finas, sal, pimenta','a gosto']],
+    passos:['Tempere o frango com sal, pimenta, limão e ervas. Grelhe em frigideira com azeite até dourar dos dois lados — aprox. 6 min de cada lado. Fatie em tiras. Reserve.','Cozinhe o macarrão integral al dente (1 a 2 min a mais que o comum). Escorra e reserve.','Na mesma frigideira do frango, salteie a abobrinha em cubos por 3 min. Ainda crocante. Reserve.','Refogue o alho no azeite, adicione o molho de tomate e cozinhe 5 min.','Rale a cenoura e adicione ao molho. Misture.','Em tigela grande, misture o macarrão ao molho.','Monte o pote em camadas: macarrão, molho, abobrinha, tiras de frango grelhado por cima.','Finalize com fio de azeite e ervas. Use potes de 700ml para esta receita.','Etiquete com "Alto em proteína". Tampe e refrigere.'],
+    dica:'<strong>💡 Canal ideal:</strong> Grupos de academia, WhatsApp de corrida e condomínio com academia. Esse público paga R$25 sem reclamar — percebe valor na versão integral e no frango grelhado.'
+  },
+  {
+    id:8,e:'🥚',n:'Macarrão à Carbonara Simples',s:'Cremoso com ovos e bacon — sem creme de leite',
+    tags:[{t:'Cremoso',c:'tp'},{t:'Clássico',c:'ta'},{t:'Diferente',c:'tl'}],
+    tempo:'25 min',rende:'8 potes de 500ml',custo:'R$3,50–5,00',
+    cp:'R$4,20',pm:'R$14',pi:'R$18–22',lp:'R$14–18',
+    ing:[['Macarrão espaguete','800 g'],['Bacon em cubinhos','300 g'],['Ovos inteiros','4 unid.'],['Gemas de ovo','2 unid.'],['Parmesão ralado fino','150 g'],['Pimenta-do-reino moída','a gosto'],['Sal','a gosto']],
+    passos:['Cozinhe o macarrão al dente. Reserve 1 xícara da água do cozimento antes de escorrer.','Em frigideira grande, doure o bacon em cubinhos sem óleo até crocante. Desligue o fogo.','Em tigela, bata os ovos, as gemas e o parmesão com pimenta até misturar bem.','Com o fogo desligado, adicione o macarrão quente à frigideira com o bacon.','Despeje a mistura de ovos sobre o macarrão e mexa rapidamente — o calor do macarrão cozinha os ovos sem deixar gelar.','Adicione colheradas da água do cozimento aos poucos para deixar cremoso (não líquido).','Ajuste o sal — o bacon e o parmesão já são salgados, cuidado.','Monte nos potes com bacon visível no topo. Finalize com parmesão e pimenta. Tampe e refrigere.'],
+    dica:'<strong>💡 Atenção:</strong> Esta receita não leva creme de leite — a cremosidade vem dos ovos. Esse detalhe é um diferencial para contar para o cliente: "Carbonara de verdade, sem creme de leite".'
+  },
+  {
+    id:9,e:'🧄',n:'Alho e Óleo com Linguiça Toscana',s:'Sabor marcante e preparo rapidíssimo',
+    tags:[{t:'Rápido',c:'ta'},{t:'Fácil',c:'tv'},{t:'Sabor forte',c:'tl'}],
+    tempo:'25 min',rende:'10 potes de 500ml',custo:'R$3,00–4,50',
+    cp:'R$3,70',pm:'R$13',pi:'R$17–21',lp:'R$13–17',
+    ing:[['Macarrão espaguete ou cabelo de anjo','1 kg'],['Linguiça toscana','400 g'],['Alho','8 dentes'],['Azeite extra virgem','6 col. sopa'],['Salsinha picada','1 maço'],['Pimenta calabresa','a gosto'],['Sal','a gosto']],
+    passos:['Cozinhe o macarrão al dente. Reserve 2 colheres da água do cozimento antes de escorrer.','Remova a linguiça da tripa (esprema para fora) e esfarele em pedaços irregulares. Reserve.','Grelhe os pedaços de linguiça na frigideira seca em fogo médio até dourar. Reserve.','Na mesma frigideira com a gordura da linguiça, adicione o azeite e o alho fatiado fino.','Doure o alho em fogo baixo por 3 minutos — deve ficar dourado claro, nunca queimado.','Adicione a água do cozimento reservada: vai formar um molho levemente cremoso.','Acrescente a linguiça dourada, a salsinha e a pimenta calabresa. Misture.','Misture o macarrão na frigideira, mexa bem para absorver o molho de alho.','Monte nos potes. Finalize com salsinha e pimenta. Tampe e refrigere.'],
+    dica:'<strong>💡 Alho x sabor:</strong> O segredo está no alho dourado em fogo BAIXO. Pressa queima o alho e amarga tudo. Paciência aqui faz a diferença entre o pote mediano e o pote que o cliente pede toda semana.'
+  },
+  {
+    id:10,e:'🫙',n:'Macarrão de Forno na Marmita (Pote Gratinado)',s:'Diferente e instagramável — alto valor percebido',
+    tags:[{t:'Diferente',c:'tp'},{t:'Premium visual',c:'tl'},{t:'Destaque',c:'ta'}],
+    tempo:'45 min',rende:'8 potes de 500ml',custo:'R$4,50–6,00',
+    cp:'R$5,20',pm:'R$16',pi:'R$22–27',lp:'R$17–22',
+    ing:[['Macarrão penne','800 g'],['Carne moída','400 g'],['Molho de tomate','2 latas'],['Mussarela fatiada ou ralada','300 g'],['Cebola','1 grande'],['Alho','3 dentes'],['Sal, pimenta, orégano','a gosto'],['Potes que vão ao forno ou micro','8 unid.']],
+    passos:['Cozinhe o macarrão al dente. Escorra e reserve.','Refogue cebola e alho, doure a carne moída quebrando os grumos. Adicione o molho de tomate e cozinhe 8 min.','Misture o macarrão ao molho em tigela.','Em potes que vão ao forno: coloque camada de macarrão, camada de mussarela, mais macarrão, finalize com mussarela generosa por cima.','Leve ao forno a 200°C por 10 minutos até a mussarela derreter e gratinar.','Retire do forno, deixe esfriar 5 minutos antes de tampar.','Etiquete: "Gratinado — pode requentar sem tampar no micro por 2 min". Refrigere.','Aviso importante na etiqueta: use potes próprios para forno — nunca potes comuns que podem derreter.'],
+    dica:'<strong>💡 Alto valor visual:</strong> Foto do pote gratinado com queijo derretido vende sozinha no WhatsApp. Cobre R$5 a mais que o pote simples — o visual justifica sem precisar explicar.'
+  },
+  {
+    id:11,e:'🥦',n:'Macarrão Integral com Legumes Salteados',s:'Vegetariano, colorido e saudável',
+    tags:[{t:'Vegetariano',c:'tv'},{t:'Integral',c:'ta'},{t:'Saudável',c:'tl'}],
+    tempo:'30 min',rende:'10 potes de 500ml',custo:'R$3,50–5,00',
+    cp:'R$4,20',pm:'R$14',pi:'R$18–22',lp:'R$14–18',
+    ing:[['Macarrão integral parafuso','1 kg'],['Brócolis em floretes','300 g'],['Abobrinha em cubos','2 unid.'],['Cenoura em cubos','2 unid.'],['Pimentão vermelho','1 unid.'],['Alho','4 dentes'],['Azeite','4 col. sopa'],['Sal, pimenta, ervas','a gosto'],['Parmesão','80 g']],
+    passos:['Cozinhe o macarrão integral al dente. Escorra e reserve.','Branqueie o brócolis: 2 minutos em água fervente com sal, depois mergulhe em água gelada para manter a cor verde viva. Escorra.','Corte os legumes em cubos de tamanho similar para cozinhar por igual.','Em frigideira grande com azeite quente, salteie a cenoura por 2 min. Adicione o pimentão e a abobrinha, saltei mais 2 min. Ainda devem estar crocantes.','Adicione o alho picado e mexa por 1 minuto.','Junte o brócolis branqueado e tempere com sal, pimenta e ervas a gosto.','Misture o macarrão aos legumes na frigideira com mais um fio de azeite.','Monte nos potes com os legumes coloridos visíveis nas bordas do pote transparente.','Finalize com parmesão ralado. Tampe e refrigere.'],
+    dica:'<strong>💡 Argumento de venda:</strong> "Macarrão integral com legumes frescos salteados" — para grupos de saúde, alimentação consciente e academia esse argumento vale um preço mais alto sem objeção.'
+  },
+  {
+    id:12,e:'🥓',n:'Macarrão com Bacon e Cream Cheese',s:'Cremoso e indulgente — vicia o cliente',
+    tags:[{t:'Cremoso',c:'tp'},{t:'Indulgente',c:'tl'},{t:'Diferente',c:'ta'}],
+    tempo:'25 min',rende:'10 potes de 500ml',custo:'R$3,80–5,00',
+    cp:'R$4,30',pm:'R$14',pi:'R$18–22',lp:'R$14–18',
+    ing:[['Macarrão parafuso','1 kg'],['Bacon em tiras','300 g'],['Cream cheese','200 g'],['Leite','200 ml'],['Cebola','1 grande'],['Alho','3 dentes'],['Cebolinha picada','a gosto'],['Sal, pimenta','a gosto']],
+    passos:['Cozinhe o macarrão al dente. Escorra e reserve.','Frite o bacon em tiras na frigideira seca até crocante. Retire e reserve. Mantenha a gordura na frigideira.','Na gordura do bacon, doure a cebola picada em fogo médio por 3 min.','Adicione o alho e mexa 1 minuto.','Reduza o fogo ao mínimo. Adicione o cream cheese e misture até derreter.','Acrescente o leite aos poucos, mexendo para formar um molho cremoso.','Ajuste o sal (bacon já é salgado) e adicione pimenta a gosto.','Junte metade do bacon ao molho. Reserve a outra metade para finalizar.','Misture o macarrão ao molho. Monte nos potes. Finalize com bacon crocante por cima e cebolinha.'],
+    dica:'<strong>💡 O diferencial:</strong> Bacon crocante por cima no momento da entrega faz o cliente abrir o pote já impressionado. Separe o bacon e oriente: "Coloca o bacon que está em cima antes de requentar".'
+  },
+  {
+    id:13,e:'🍗',n:'Frango com Requeijão e Milho',s:'Cremoso, docinho — um dos favoritos',
+    tags:[{t:'Cremoso',c:'tp'},{t:'Família',c:'tv'},{t:'Fácil',c:'ta'}],
+    tempo:'30 min',rende:'10 potes de 500ml',custo:'R$3,50–4,50',
+    cp:'R$4,00',pm:'R$13',pi:'R$17–20',lp:'R$13–16',
+    ing:[['Macarrão parafuso','1 kg'],['Frango desfiado','500 g'],['Requeijão cremoso','200 g'],['Milho em lata','1 lata'],['Creme de leite','1 caixinha'],['Cebola','1 unid.'],['Alho','3 dentes'],['Sal, pimenta, salsinha','a gosto']],
+    passos:['Cozinhe o frango na pressão com sal. Desfie e reserve.','Cozinhe o macarrão al dente. Escorra e reserve.','Em frigideira, refogue cebola e alho no óleo por 3 min.','Adicione o frango desfiado e misture bem.','Reduza o fogo. Adicione o requeijão e mexa até derreter e envolver o frango.','Acrescente o creme de leite e misture para um molho cremoso.','Adicione o milho escorrido e misture. Tempere com sal e pimenta.','Misture o macarrão ao molho cremoso em tigela grande.','Monte nos potes. Finalize com salsinha e milho visível por cima. Tampe e refrigere.'],
+    dica:'<strong>💡 Público certo:</strong> Crianças amam o sabor adocicado do milho com o requeijão. Vende muito bem para mães com crianças em casa e em grupos de WhatsApp de pais de escola.'
+  },
+  {
+    id:14,e:'🫑',n:'Macarrão com Frango e Molho de Queijo',s:'Frango + queijo derretido — impossível resistir',
+    tags:[{t:'Cremoso',c:'tp'},{t:'Alta demanda',c:'tl'},{t:'Família',c:'tv'}],
+    tempo:'35 min',rende:'10 potes de 500ml',custo:'R$4,00–5,50',
+    cp:'R$4,70',pm:'R$15',pi:'R$19–23',lp:'R$14–18',
+    ing:[['Macarrão penne','1 kg'],['Frango desfiado','500 g'],['Queijo prato ralado','150 g'],['Mussarela ralada','150 g'],['Leite','400 ml'],['Manteiga','2 col. sopa'],['Farinha de trigo','1,5 col. sopa'],['Alho, sal, pimenta, noz-moscada','a gosto']],
+    passos:['Cozinhe o frango na pressão com sal. Desfie e tempere com alho e pimenta. Reserve.','Cozinhe o macarrão al dente. Escorra e reserve.','Prepare o molho de queijo: derreta a manteiga, adicione a farinha e mexa 2 min.','Acrescente o leite aos poucos mexendo sempre até engrossar.','Adicione o queijo prato e a mussarela, mexa até derreter completamente.','Tempere com sal, pimenta e noz-moscada.','Misture o frango desfiado ao molho de queijo.','Misture o macarrão ao molho em tigela grande.','Monte nos potes. Finalize com parmesão e frango visível. Tampe e refrigere.'],
+    dica:'<strong>💡 Combinação vencedora:</strong> Frango com queijo derretido é confort food clássico — qualquer idade ama. Esse pote costuma ser o mais pedido depois que o cliente experimenta uma vez.'
+  },
+  {
+    id:15,e:'🌽',n:'Macarrão Caipira (Frango + Bacon + Milho)',s:'Robusto, farto e muito saboroso',
+    tags:[{t:'Farto',c:'tl'},{t:'Diferente',c:'tp'},{t:'Todos',c:'tv'}],
+    tempo:'40 min',rende:'10 potes de 500ml',custo:'R$4,50–6,00',
+    cp:'R$5,10',pm:'R$16',pi:'R$20–25',lp:'R$15–20',
+    ing:[['Macarrão parafuso','1 kg'],['Frango desfiado','400 g'],['Bacon em cubinhos','200 g'],['Milho em lata','1 lata'],['Molho de tomate','2 latas'],['Cebola','1 grande'],['Alho','4 dentes'],['Salsinha, sal, pimenta','a gosto']],
+    passos:['Cozinhe o frango na pressão com sal. Desfie e reserve.','Cozinhe o macarrão al dente. Escorra e reserve.','Na frigideira seca, doure o bacon em cubinhos até crocante. Reserve.','Na gordura do bacon, refogue a cebola picada por 3 min. Adicione o alho e mexa 1 min.','Acrescente o molho de tomate e cozinhe 5 min em fogo médio.','Junte o frango desfiado ao molho e misture.','Adicione o milho escorrido e o bacon. Misture.','Tempere com sal, pimenta e salsinha picada.','Misture o macarrão ao molho em tigela grande. Monte nos potes.','Finalize com bacon e milho visíveis por cima, salsinha. Tampe e refrigere.'],
+    dica:'<strong>💡 Nome que vende:</strong> "Macarrão Caipira" tem identidade — gera curiosidade e é fácil de lembrar. Clientes pedem pelo nome e indicam pelo nome. Uma marca simples começa assim.'
+  }
+];
+
+const canaisData = [
+  {
+    icon:'💬',cls:'g',n:'WhatsApp — sua lista de contatos',
+    body:`<p style="font-size:14px;margin-bottom:12px">Sua lista de contatos tem dezenas de clientes em potencial. Toda segunda-feira de manhã, mande o cardápio da semana.</p>
+    <p style="font-size:12px;font-weight:700;color:var(--escuro);margin-bottom:7px">✉️ Mensagem de lançamento — copie e personalize:</p>
+    <div class="msg" onclick="cp(this)"><button class="cpb">Copiar</button>Oi [nome]! 👋
+
+Comecei a fazer Macarrão no Pote aqui em casa e ficou incrível 🍝
+
+Essa semana tem:
+✅ [Sabor 1] — R$[preço]
+✅ [Sabor 2] — R$[preço]
+
+Entrego no bairro ou você retira 😊
+Quer reservar o seu?</div>
+    <div class="dica"><strong>💡</strong> Crie uma lista de transmissão com até 256 contatos. Uma vez por semana, toda segunda. Quem quiser responde — sem spam, sem importunar.</div>`
+  },
+  {
+    icon:'👥',cls:'b',n:'Grupos de vizinhos e condomínio',
+    body:`<p style="font-size:14px;margin-bottom:12px">Entre em grupos do seu bairro ou condomínio. Um post semanal, sempre no mesmo dia — a regularidade cria expectativa.</p>
+    <div class="msg" onclick="cp(this)"><button class="cpb">Copiar</button>Boa tarde, pessoal! 👋
+
+Moro aqui no [bairro/condomínio] e faço Macarrão no Pote caseiro.
+Ótima opção de almoço prático e gostoso 🍝
+
+Essa semana:
+🍅 [Sabor 1] — R$[preço]
+🧀 [Sabor 2] — R$[preço]
+
+Entrego aqui mesmo. Peça no privado! 📲</div>
+    <div class="aviso"><strong>⚠️ Regra:</strong> 1 post por semana no máximo. Mais do que isso vira spam e te removem do grupo. A regularidade é o que funciona.</div>`
+  },
+  {
+    icon:'📸',cls:'r',n:'Instagram e TikTok',
+    body:`<p style="font-size:14px;margin-bottom:12px">Você não precisa de seguidores para vender. Precisa de conteúdo local que apareça para pessoas do seu bairro.</p>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      ${[['1️⃣','Bastidores','Foto dos ingredientes separados: "Hoje tem produção 🍝 — me chama para reservar!"'],['2️⃣','Processo','Vídeo curto da panela no fogo: "Feito com ingredientes frescos 💚"'],['3️⃣','Pote pronto','Foto do pote etiquetado aberto: "[Sabor] por R$[preço] — últimas unidades!"'],['4️⃣','Entrega','Foto dos potes embalados: "Saindo com os pedidos da semana 🚴"'],['5️⃣','Próxima semana','Texto simples: "Esgotou! Próxima produção: [data]. Reserve o seu 👇"']].map(([n,t,d])=>`<div style="background:#fdf9f5;border:1px solid var(--borda);border-radius:9px;padding:11px"><strong>${n} ${t}</strong><br><span style="font-size:13px;color:var(--muted)">${d}</span></div>`).join('')}
+    </div>`
+  },
+  {
+    icon:'🏢',cls:'y',n:'Escola, trabalho e academia',
+    body:`<p style="font-size:14px;margin-bottom:12px">Se você ou alguém da família frequenta esses lugares, é o canal mais fácil e de conversão mais alta.</p>
+    <div class="card" style="margin-bottom:11px"><h3>🎯 Estratégia da amostra</h3><p style="font-size:14px;margin:6px 0 0">Leve 3 potes em um dia e ofereça para as pessoas provarem. Quem gosta, pede na semana seguinte. Uma rodada de amostras converte de 3 a 5 clientes novos em média.</p></div>
+    <div class="msg" onclick="cp(this)"><button class="cpb">Copiar</button>Pessoal, estou fazendo Macarrão no Pote caseiro.
+Trouxe uns potes pra vocês provarem hoje! 🍝
+
+Quem gostar, semana que vem tenho pedido.
+R$[preço] por pote — entrego aqui mesmo.</div>`
+  }
+];
+
+const msgsData = [
+  {t:'Lançamento — 1° contato',m:`Oi [nome]! 👋\n\nComecei a fazer Macarrão no Pote aqui em casa e ficou incrível 🍝\n\nEssa semana tem:\n✅ [Sabor 1] — R$[preço]\n✅ [Sabor 2] — R$[preço]\n\nEntrego no bairro ou você retira.\nQuer reservar o seu?`},
+  {t:'Cardápio semanal — toda segunda',m:`🍝 CARDÁPIO DA SEMANA 🍝\n\n1️⃣ [Sabor 1] — R$[preço]\n2️⃣ [Sabor 2] — R$[preço]\n3️⃣ [Sabor 3] — R$[preço]\n\n📦 Pote 500ml • Feito com ingredientes frescos\n⏰ Pedidos até [dia] às [hora]\n📲 Me chama aqui!`},
+  {t:'Urgência — últimas unidades',m:`⚡ Últimas unidades dessa semana!\n\nAinda tem [número] potes de [sabor].\nDepois de hoje fecho os pedidos 🙅\n\nReserva aqui no zap 👇`},
+  {t:'Pós-entrega — fidelização',m:`Oi [nome]! Espero que tenha curtido o pote 🍝❤️\n\nO que você achou? Qualquer feedback me ajuda.\n\nNa semana que vem tem novo cardápio!\nPosso te avisar?`},
+  {t:'Pedido de indicação',m:`Oi [nome]! Que bom que gostou! 😊🍝\n\nPosso pedir um favor? Se conhecer alguém que goste de comida caseira e prática, me indica?\n\nPra você que indicar, da próxima compra você ganha [desconto] 🎁`},
+];
+
+const premData = [
+  {e:'🥩',n:'Carne Seca com Requeijão',m:'Alta demanda — especialmente em comunidades nordestinas',d:'Posicione como "carne seca artesanal com cebola caramelizada". A nostalgia justifica preços entre R$25 e R$30 por pote sem objeção.'},
+  {e:'🍤',n:'Camarão ao Alho e Óleo',m:'Maior lucro por pote — até R$30 de margem',d:'Venda como versão especial, disponível somente sob encomenda. Cobre R$35 a R$45 por pote de 500ml. Ótimo para presentear — kit com 2 potes vale R$70 facilmente.'},
+  {e:'🫙',n:'Macarrão Gratinado no Pote',m:'Alto valor visual — se vende pela foto',d:'A foto do queijo gratinado no pote funciona sozinha no WhatsApp. Justifica cobrar R$5 a R$8 a mais que o pote simples equivalente.'},
+  {e:'🎯',n:'Kit Presente (2 potes)',m:'Aumenta o ticket médio sem novo produto',d:'Ofereça 2 potes de sabores diferentes embalados juntos num saco kraft com laço. Para presente de aniversário, Dia das Mães, etc. Cobra o preço dos 2 potes + R$5 pela embalagem.'},
+];
+
+// ============================================================
+// RENDERIZAÇÃO
+// ============================================================
+function renderReceitas(){
+  document.getElementById('rg').innerHTML = receitas.map(r=>`
+    <div class="rc" onclick="abrirR(${r.id})">
+      <div class="rc-top">
+        <span class="rc-emoji">${r.e}</span>
+        <h3>${r.n}</h3>
+        <div class="rs">${r.s}</div>
+      </div>
+      <div class="rc-tags">${r.tags.map(t=>`<span class="tag ${t.c}">${t.t}</span>`).join('')}</div>
+      <div class="rc-bot"><span class="rp">${r.pi}</span><span class="rt">⏱ ${r.tempo}</span></div>
+    </div>`).join('');
+}
+
+function abrirR(id){
+  const r=receitas.find(x=>x.id===id);
+  document.getElementById('me').textContent=r.e;
+  document.getElementById('mh').textContent=r.n;
+  document.getElementById('mte').textContent=r.tempo;
+  document.getElementById('mre').textContent=r.rende;
+  document.getElementById('mce').textContent=r.custo;
+  document.getElementById('mta').innerHTML=r.tags.map(t=>`<span class="tag ${t.c}" style="margin-right:5px">${t.t}</span>`).join('');
+  document.getElementById('mi').innerHTML=r.ing.map(i=>`<li><span>${i[0]}</span><span class="q">${i[1]}</span></li>`).join('');
+  document.getElementById('mp').innerHTML=r.passos.map((p,i)=>`<li><span class="pn">${i+1}</span><span>${p}</span></li>`).join('');
+  document.getElementById('md2').innerHTML=r.dica;
+  document.getElementById('mcp').textContent=r.cp;
+  document.getElementById('mpm').textContent=r.pm;
+  document.getElementById('mpi').textContent=r.pi;
+  document.getElementById('mlp').textContent=r.lp;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function fModal(e){if(e.target===document.getElementById('modal'))fModalBtn();}
+function fModalBtn(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+
+function renderCanais(){
+  document.getElementById('ac').innerHTML=canaisData.map((c,i)=>`
+    <div class="ac">
+      <div class="ah" onclick="tAc(${i})">
+        <div class="ai ${c.cls}">${c.icon}</div>
+        <h3>${c.n}</h3>
+        <span class="achv" id="achv-${i}">▾</span>
+      </div>
+      <div class="ab" id="ab-${i}">${c.body}</div>
+    </div>`).join('');
+}
+
+function tAc(i){
+  const b=document.getElementById('ab-'+i);
+  const h=b.previousElementSibling;
+  const v=document.getElementById('achv-'+i);
+  const o=b.classList.contains('open');
+  b.classList.toggle('open',!o);
+  h.classList.toggle('open',!o);
+  v.style.transform=o?'':'rotate(180deg)';
+}
+
+function renderBonus(){
+  // tabela prec
+  const dados=[
+    ['🍅 Frango ao Molho','R$3,00','R$15–18','R$12–15'],
+    ['🥩 Carne Moída','R$3,50','R$15–18','R$11–14'],
+    ['🌶️ Calabresa c/ Bacon','R$4,00','R$18–22','R$14–18'],
+    ['🧀 4 Queijos','R$4,50','R$20–24','R$15–19'],
+    ['🐟 Atum c/ Azeitona','R$3,50','R$17–21','R$13–17'],
+    ['💪 Fit com Frango','R$5,00','R$22–27','R$17–22'],
+    ['🥩 Carne Seca','R$6,00','R$24–30','R$18–24'],
+  ];
+  document.getElementById('tb-prec').innerHTML=dados.map((d,i)=>`
+    <tr><td style="padding:9px 12px;border-bottom:1px solid #f0ebe3;font-size:13px;font-weight:600;${i%2?'background:#fdf9f5':''}">${d[0]}</td>
+    <td style="padding:9px 12px;border-bottom:1px solid #f0ebe3;text-align:center;color:var(--muted);font-size:13px;${i%2?'background:#fdf9f5':''}">${d[1]}</td>
+    <td style="padding:9px 12px;border-bottom:1px solid #f0ebe3;text-align:center;font-weight:700;color:var(--laranja);font-size:13px;${i%2?'background:#fdf9f5':''}">${d[2]}</td>
+    <td style="padding:9px 12px;border-bottom:1px solid #f0ebe3;text-align:center;font-weight:700;color:var(--verde);font-size:13px;${i%2?'background:#fdf9f5':''}">${d[3]}</td></tr>`).join('');
+
+  // mensagens
+  document.getElementById('msgs').innerHTML=msgsData.map(m=>`
+    <div style="margin-bottom:13px">
+      <div style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">${m.t}</div>
+      <div class="msg" onclick="cp(this)"><button class="cpb">Copiar</button>${m.m.replace(/\n/g,'<br>')}</div>
+    </div>`).join('');
+
+  // premium
+  document.getElementById('prem').innerHTML=premData.map(p=>`
+    <div style="background:#fdf9f5;border:1.5px solid var(--borda);border-radius:12px;padding:14px 16px;margin-bottom:11px;display:flex;gap:12px;align-items:flex-start">
+      <span style="font-size:30px;flex-shrink:0">${p.e}</span>
+      <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px">${p.n}</div>
+        <div style="font-size:12px;color:var(--laranja);font-weight:600;margin-bottom:5px">▸ ${p.m}</div>
+        <div style="font-size:13px;color:var(--muted)">${p.d}</div>
+      </div>
+    </div>`).join('');
+}
+
+function tBonus(id){
+  const b=document.getElementById('bn-'+id);
+  const c=document.getElementById('ch-'+id);
+  const o=b.classList.contains('open');
+  b.classList.toggle('open',!o);
+  c.style.transform=o?'':'rotate(180deg)';
+}
+
+// ============================================================
+// CALCULADORA
+// ============================================================
+function fmt(n){return'R$'+n.toFixed(2).replace('.',',');}
+function calc(){
+  const ci=+document.getElementById('ci').value||0;
+  const ce=+document.getElementById('ce').value||0;
+  const cg=+document.getElementById('cg').value||0;
+  const cf=+document.getElementById('cf').value||0;
+  const cp=+document.getElementById('cp').value||0;
+  const custo=ci+ce+cg+cf;
+  const lucro=cp-custo;
+  const margem=cp>0?(lucro/cp*100):0;
+  const min=custo*3;
+  document.getElementById('rc').textContent=fmt(custo);
+  document.getElementById('rl').textContent=fmt(lucro);
+  document.getElementById('rm').textContent=margem.toFixed(0)+'%';
+  document.getElementById('rmi').textContent=fmt(min);
+  calcMeta();
+}
+function calcMeta(){
+  const p=+document.getElementById('sl').value;
+  const preco=+document.getElementById('cp').value||18;
+  const ci=+document.getElementById('ci').value||3.5;
+  const ce=+document.getElementById('ce').value||1.2;
+  const cg=+document.getElementById('cg').value||0.3;
+  const cf=+document.getElementById('cf').value||0.5;
+  const custo=ci+ce+cg+cf;
+  document.getElementById('sv').textContent=p;
+  const rec=p*preco;
+  const luc=p*(preco-custo);
+  const lmes=luc*4.3;
+  const min=Math.round(p*3.5);
+  document.getElementById('mr').textContent='R$'+Math.round(rec).toLocaleString('pt-BR');
+  document.getElementById('mls').textContent='R$'+Math.round(luc).toLocaleString('pt-BR');
+  document.getElementById('mlm').textContent='R$'+Math.round(lmes).toLocaleString('pt-BR');
+  document.getElementById('mtp').textContent=min<60?min+' min':(Math.round(min/60*10)/10)+'h';
+}
+
+// ============================================================
+// TABS
+// ============================================================
+const TABS=['inicio','utensilios','receitas','montar','vender','calculadora','escalar','bonus'];
+function go(name){
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('active'));
+  document.getElementById('t-'+name).classList.add('active');
+  document.querySelectorAll('.nt')[TABS.indexOf(name)].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ============================================================
+// COPIAR
+// ============================================================
+function cp(el){
+  const txt=el.innerText.replace('Copiar','').replace('Copiado!','').trim();
+  navigator.clipboard.writeText(txt).then(()=>{
+    const b=el.querySelector('.cpb');
+    b.textContent='Copiado!';b.classList.add('ok');
+    toast('✓ Mensagem copiada!');
+    setTimeout(()=>{b.textContent='Copiar';b.classList.remove('ok');},2000);
+  });
+}
+function toast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// INIT
+renderReceitas();renderCanais();renderBonus();calc();
+</script>
+</body>
+</html>
